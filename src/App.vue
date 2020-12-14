@@ -1,13 +1,27 @@
 <template>
   <div id="app">
-    <h1>Test App</h1>
-    <button>Go</button>
+    <h1>Test app</h1>
+    <button @click="fetchDatafromAPI()">Go</button>
+    <p>{{ info }}</p>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "App",
+  data() {
+    return {
+      info: null,
+    };
+  },
+  methods: {
+    fetchDatafromAPI() {
+      axios
+        .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+        .then((response) => (this.info = response));
+    },
+  },
 };
 </script>
 
