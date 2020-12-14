@@ -1,13 +1,27 @@
 <template>
   <div id="app">
-    <h1>Test App</h1>
-    <button>Go</button>
+    <h1>Test app</h1>
+    <button @click="fetchDatafromAPI()">Go</button>
+    <p>{{ books }}</p>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "App",
+  data() {
+    return {
+      books: null,
+    };
+  },
+  methods: {
+    fetchDatafromAPI() {
+      axios
+        .get("https://www.reddit.com/r/technology/new.json")
+        .then((response) => (this.books = response.data.data.children));
+    },
+  },
 };
 </script>
 
