@@ -2,7 +2,7 @@
   <div id="app">
     <h1>Test app</h1>
     <button @click="fetchDatafromAPI()">Go</button>
-    <p>{{ info }}</p>
+    <p>{{ books }}</p>
   </div>
 </template>
 
@@ -12,14 +12,14 @@ export default {
   name: "App",
   data() {
     return {
-      info: null,
+      books: null,
     };
   },
   methods: {
     fetchDatafromAPI() {
       axios
-        .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-        .then((response) => (this.info = response));
+        .get("https://www.reddit.com/r/technology/new.json")
+        .then((response) => (this.books = response.data.data.children));
     },
   },
 };
