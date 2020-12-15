@@ -16,11 +16,22 @@ export default {
     };
   },
   methods: {
-    getPosts() {
-      axios
-        .get("https://www.reddit.com/r/technology/new.json")
-        .then((response) => (this.books = response.data.data.children));
+    async getPosts() {
+      // try {
+      const response = await axios.get(
+        "https://www.reddit.com/r/technology/new.json"
+      );
+      return (this.posts = await response.data.data.children);
+      // } catch (error) {
+      //   alert(error);
+      // }
     },
+
+    // getPosts() {
+    //   axios
+    //     .get("https://www.reddit.com/r/technology/new.json")
+    //     .then((response) => (this.books = response.data.data.children));
+    // },
   },
 };
 </script>
