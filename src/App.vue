@@ -2,17 +2,21 @@
   <div id="app">
     <h1>Test app</h1>
     <button @click="getPosts()">Go</button>
-    <p>{{ posts }}</p>
+    <PostsTable v-bind:posts="posts"></PostsTable>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import PostsTable from "./components/PostsTable";
 export default {
   name: "App",
+  components: {
+    PostsTable,
+  },
   data() {
     return {
-      posts: null,
+      posts: [],
     };
   },
   methods: {
