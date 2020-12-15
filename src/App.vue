@@ -13,7 +13,7 @@
       </thead>
       <tbody>
         <tr v-for="(post, index) in posts" :key="index">
-          <td>{{ index }}</td>
+          <td>{{ index + 1 }}</td>
           <td>{{ post.data.author_fullname }}</td>
           <td>{{ post.data.title }}</td>
           <td><button>Detail</button></td>
