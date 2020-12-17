@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      posts: [],
+      posts: null,
     };
   },
   methods: {
@@ -46,5 +46,6 @@ export default {
 button {
   font-size: 20px;
   padding: 5px 20px;
+  margin: 10px;
 }
 </style>
