@@ -11,7 +11,9 @@
 
 <script>
 import { AgGridVue } from "ag-grid-vue";
-import BtnCellRenderer from "./btn-cell-renderer.vue";
+import "../../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+import "../../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+import DetailButton from "./DetailButton.vue";
 
 export default {
   name: "PostsTable",
@@ -20,46 +22,45 @@ export default {
   },
   data() {
     return {
-      columnDefs: null,
+      columnDefs: this.columnDef(),
       rowData: null,
       frameworkComponents: null,
     };
   },
   props: ["posts"],
   methods: {
-    onGridReady(params) {
-      this.gridApi = params.api;
-      this.columnApi = params.columnApi;
+    onGridReady() {},
+    columnDef: function() {
+      return [
+        {
+          headerName: "Author",
+          field: "data.author",
+          sortable: true,
+          filter: true,
+        },
+        {
+          headerName: "Title",
+          field: "data.title",
+          sortable: true,
+          filter: true,
+        },
+        {
+          headerName: "Action",
+          field: "data.created",
+          cellRenderer: "detailBtnCellRenderer",
+          cellRendererParams: {
+            clicked: function(key) {
+              alert(`${key} was clicked`);
+            },
+          },
+        },
+      ];
     },
   },
   beforeMount() {
     this.rowData = this.posts;
-    this.columnDefs = [
-      {
-        headerName: "Author",
-        field: "data.author",
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: "Title",
-        field: "data.title",
-        sortable: true,
-        filter: true,
-      },
-      {
-        headerName: "Action",
-        field: "data.created",
-        cellRenderer: "btnCellRenderer",
-        cellRendererParams: {
-          clicked: function(key) {
-            alert(`${key} was clicked`);
-          },
-        },
-      },
-    ];
     this.frameworkComponents = {
-      btnCellRenderer: BtnCellRenderer,
+      detailBtnCellRenderer: DetailButton,
     };
   },
 };
