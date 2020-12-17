@@ -46,11 +46,11 @@ export default {
         },
         {
           headerName: "Action",
-          field: "data.created",
+          field: "data.id",
           cellRenderer: "detailBtnCellRenderer",
           cellRendererParams: {
-            clicked: function(key) {
-              alert(`${key} was clicked`);
+            clicked: function(id) {
+              alert(`${id} was clicked`);
             },
           },
         },
