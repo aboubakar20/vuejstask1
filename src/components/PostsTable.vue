@@ -55,7 +55,6 @@ export default {
               let data = this.postsData;
               data.push(postsData);
               this.$emit("postData", data, this.isShow);
-              // console.log(`${data}`);
             },
           },
         },
