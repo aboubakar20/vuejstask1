@@ -2,21 +2,29 @@
   <div id="app">
     <h1>Test app</h1>
     <button @click="getPosts()">Go</button>
-    <PostsTable v-bind:posts="posts"></PostsTable>
+    <PostsTable
+      v-bind:posts="posts"
+      v-on:postData="getAndShowPostDetail"
+    ></PostsTable>
+    <DetailCard v-bind:postDetail="detailCardData" v-if="isShow"></DetailCard>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import PostsTable from "./components/PostsTable";
+import DetailCard from "./components/DetailCard";
 export default {
   name: "App",
   components: {
     PostsTable,
+    DetailCard,
   },
   data() {
     return {
       posts: null,
+      detailCardData: null,
+      isShow: false,
     };
   },
   methods: {
@@ -29,6 +37,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    getAndShowPostDetail(postDetail, isShow) {
+      this.detailCardData = postDetail;
+      this.isShow = isShow;
     },
   },
 };

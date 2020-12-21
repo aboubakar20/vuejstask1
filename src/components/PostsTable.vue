@@ -22,6 +22,8 @@ export default {
   },
   data() {
     return {
+      isShow: true,
+      postsData: [],
       columnDefs: this.columnDef(),
       rowData: null,
       frameworkComponents: null,
@@ -46,11 +48,14 @@ export default {
         },
         {
           headerName: "Action",
-          field: "data.id",
+          field: "data",
           cellRenderer: "detailBtnCellRenderer",
           cellRendererParams: {
-            clicked: function(id) {
-              alert(`${id} was clicked`);
+            clicked: (postsData) => {
+              let data = this.postsData;
+              data.push(postsData);
+              this.$emit("postData", data, this.isShow);
+              // console.log(`${data}`);
             },
           },
         },
