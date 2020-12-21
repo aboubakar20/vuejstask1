@@ -6,7 +6,7 @@
       v-bind:posts="posts"
       v-on:postData="getAndShowPostDetail"
     ></PostsTable>
-    <DetailCard v-bind:postDetails="cardDetails" v-if="isShow"></DetailCard>
+    <DetailCard v-bind:postDetails="cardDetails"></DetailCard>
   </div>
 </template>
 
@@ -24,7 +24,6 @@ export default {
     return {
       posts: null,
       cardDetails: null,
-      isShow: false,
     };
   },
   methods: {
@@ -37,7 +36,6 @@ export default {
 
     getAndShowPostDetail(postDetail) {
       this.cardDetails = postDetail;
-      this.isShow = true;
     },
   },
 };
