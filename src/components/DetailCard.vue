@@ -1,17 +1,18 @@
 <template>
   <div>
     <section>
-      <article class="card">
+      <article
+        class="card"
+        v-for="postDetail in postDetails"
+        :key="'author' + postDetail.id + '191'"
+      >
         <h3>Author:</h3>
-        <p
-          v-for="postDetails in postDetail"
-          :key="'author' + postDetails.id + '191'"
-        >
-          {{ postDetails.author }}
+        <p>
+          {{ postDetail.author }}
         </p>
         <h3>Title:</h3>
-        <p v-for="postDetails in postDetail" :key="'title' + postDetails.id">
-          {{ postDetails.title }}
+        <p>
+          {{ postDetail.title }}
         </p>
       </article>
     </section>
@@ -20,7 +21,7 @@
 
 <script>
 export default {
-  props: ["postDetail"],
+  props: ["postDetails"],
 };
 </script>
 

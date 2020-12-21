@@ -22,9 +22,8 @@ export default {
   },
   data() {
     return {
-      isShow: true,
       postsData: [],
-      columnDefs: this.columnDef(),
+      columnDefs: this.getColumnDefs(),
       rowData: null,
       frameworkComponents: null,
     };
@@ -32,7 +31,7 @@ export default {
   props: ["posts"],
   methods: {
     onGridReady() {},
-    columnDef: function() {
+    getColumnDefs: function() {
       return [
         {
           headerName: "Author",
@@ -51,10 +50,9 @@ export default {
           field: "data",
           cellRenderer: "detailBtnCellRenderer",
           cellRendererParams: {
-            clicked: (postsData) => {
-              let data = this.postsData;
-              data.push(postsData);
-              this.$emit("postData", data, this.isShow);
+            clicked: (posts) => {
+              this.postsData.push(posts);
+              this.$emit("postData", this.postsData);
             },
           },
         },

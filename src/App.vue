@@ -6,7 +6,7 @@
       v-bind:posts="posts"
       v-on:postData="getAndShowPostDetail"
     ></PostsTable>
-    <DetailCard v-bind:postDetail="detailCardData" v-if="isShow"></DetailCard>
+    <DetailCard v-bind:postDetails="cardDetails" v-if="isShow"></DetailCard>
   </div>
 </template>
 
@@ -23,25 +23,21 @@ export default {
   data() {
     return {
       posts: null,
-      detailCardData: null,
+      cardDetails: null,
       isShow: false,
     };
   },
   methods: {
     async getPosts() {
-      try {
-        const response = await axios.get(
-          "https://www.reddit.com/r/technology/new.json"
-        );
-        this.posts = response.data.data.children;
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await axios.get(
+        "https://www.reddit.com/r/technology/new.json"
+      );
+      this.posts = response.data.data.children;
     },
 
-    getAndShowPostDetail(postDetail, isShow) {
-      this.detailCardData = postDetail;
-      this.isShow = isShow;
+    getAndShowPostDetail(postDetail) {
+      this.cardDetails = postDetail;
+      this.isShow = true;
     },
   },
 };
