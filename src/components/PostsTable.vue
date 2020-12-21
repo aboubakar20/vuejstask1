@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      postsData: [],
+      postDetail: [],
       columnDefs: this.getColumnDefs(),
       rowData: null,
       frameworkComponents: null,
@@ -50,9 +50,9 @@ export default {
           field: "data",
           cellRenderer: "detailBtnCellRenderer",
           cellRendererParams: {
-            clicked: (posts) => {
-              this.postsData.push(posts);
-              this.$emit("postData", this.postsData);
+            clicked: (selectedPost) => {
+              this.postDetail.push(selectedPost);
+              this.$emit("postData", this.postDetail);
             },
           },
         },
