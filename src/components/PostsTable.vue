@@ -22,7 +22,8 @@ export default {
   },
   data() {
     return {
-      columnDefs: this.columnDef(),
+      postDetail: [],
+      columnDefs: this.getColumnDefs(),
       rowData: null,
       frameworkComponents: null,
     };
@@ -30,7 +31,7 @@ export default {
   props: ["posts"],
   methods: {
     onGridReady() {},
-    columnDef: function() {
+    getColumnDefs: function() {
       return [
         {
           headerName: "Author",
@@ -46,11 +47,12 @@ export default {
         },
         {
           headerName: "Action",
-          field: "data.id",
+          field: "data",
           cellRenderer: "detailBtnCellRenderer",
           cellRendererParams: {
-            clicked: function(id) {
-              alert(`${id} was clicked`);
+            clicked: (selectedPost) => {
+              this.postDetail.push(selectedPost);
+              this.$emit("postData", this.postDetail);
             },
           },
         },

@@ -2,33 +2,40 @@
   <div id="app">
     <h1>Test app</h1>
     <button @click="getPosts()">Go</button>
-    <PostsTable v-bind:posts="posts"></PostsTable>
+    <PostsTable
+      v-bind:posts="posts"
+      v-on:postData="getAndShowPostDetail"
+    ></PostsTable>
+    <DetailCard v-bind:postDetails="cardDetails"></DetailCard>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import PostsTable from "./components/PostsTable";
+import DetailCard from "./components/DetailCard";
 export default {
   name: "App",
   components: {
     PostsTable,
+    DetailCard,
   },
   data() {
     return {
       posts: null,
+      cardDetails: null,
     };
   },
   methods: {
     async getPosts() {
-      try {
-        const response = await axios.get(
-          "https://www.reddit.com/r/technology/new.json"
-        );
-        this.posts = response.data.data.children;
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await axios.get(
+        "https://www.reddit.com/r/technology/new.json"
+      );
+      this.posts = response.data.data.children;
+    },
+
+    getAndShowPostDetail(postDetail) {
+      this.cardDetails = postDetail;
     },
   },
 };
